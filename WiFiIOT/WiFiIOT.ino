@@ -300,8 +300,8 @@ void handlePostSerial() {
 
   String data = server.arg("plain");
   // clear stream buffer
-  if(Serial.available()) {
-    Serial.readString();
+  while(Serial.available()) {
+    Serial.read();
   }
   Serial.println(data.c_str());
   String response = Serial.readStringUntil('\n');
