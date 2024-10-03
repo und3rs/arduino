@@ -3,6 +3,9 @@
 #include <ArduinoJson.h>
 #include <EEPROM.h>
 #include <ESP8266mDNS.h>
+#include <Wire.h>
+#include <RtcDS3231.h>
+
 
 /***********************************
 // ENVIRONMENTS
@@ -21,6 +24,7 @@
 #define PIN_1 2
 
 ESP8266WebServer server(80);
+RtcDS3231<TwoWire> Rtc(Wire);
 
 
 /***********************************
