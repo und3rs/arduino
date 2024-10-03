@@ -1,0 +1,2 @@
+[ATTiny 와 ESP8266d의 결선도]
+https://www.hackster.io/PatelDarshil/connecting-attiny85-to-wifi-using-esp8266-f806a2
