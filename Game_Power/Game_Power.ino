@@ -1,6 +1,6 @@
 // Set Environments - START
 #define PIN_SPEAKER 4
-#define PIN_NEO_PIXEL 8 // On Trinket or Gemma, suggest changing this to 1
+#define PIN_NEO_PIXEL 5 // On Trinket or Gemma, suggest changing this to 1
 #define PIN_BTN_1 2
 #define PIN_BTN_2 3
 
