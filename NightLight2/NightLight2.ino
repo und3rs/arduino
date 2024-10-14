@@ -7,6 +7,8 @@
 
 #define TIME_OUT 5
 
+#define DEBUG 1
+
 volatile float brightnessScale = 1.0f;
 volatile float brightness = 255;
 
@@ -18,7 +20,9 @@ volatile bool isRunning = false;
 
 void setup() {
   // put your setup code here, to run once:
+  #ifdef DEBUG
   Serial.begin(9600);
+  #endif
 
   pinMode(PIN_LED, OUTPUT);
   pinMode(PIN_UP, INPUT_PULLUP);
@@ -47,11 +51,15 @@ void loop() {
     if(digitalRead(PIN_UP) == LOW) {
       brightnessScale = min(brightnessScale + 0.1f, 1.0f);
       updateBrightness();
+      #ifdef DEBUG
       Serial.println(brightness);
+      #endif
     } else if(digitalRead(PIN_DOWN) == LOW) {
       brightnessScale = max(brightnessScale - 0.1f, 0.1f);
       updateBrightness();
+      #ifdef DEBUG
       Serial.println(brightness);
+      #endif
     }
     last_interrupt_time = interrupt_time;
   }
@@ -61,7 +69,9 @@ void loop() {
 
 void start() {
   if(isRunning == false) {
+    #ifdef DEBUG
     Serial.println("Start()");
+    #endif
     isRunning = true;
     passedTimeInSec = 0;
     timerId = timer.setInterval(1000, tick);
@@ -74,7 +84,9 @@ void start() {
 
 void stop() {
   if(isRunning == true) {
+    #ifdef DEBUG
     Serial.println("Stop()");
+    #endif
     isRunning = false;
     timer.disable(timerId);
     timer.deleteTimer(timerId);
@@ -93,12 +105,13 @@ int updateBrightness() {
 
 
 void tick() {
+  Serial.print("[+Tick]");
   if(isRunning) {
     passedTimeInSec++;
+    #ifdef DEBUG
     Serial.print("[Time]: ");
     Serial.println(passedTimeInSec);
-    // Serial.print(", [Bright]: ");
-    // Serial.println(brightness);
+    #endif
 
     if(passedTimeInSec >= TIME_OUT && isRunning) {
       stop();
