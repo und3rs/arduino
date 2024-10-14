@@ -20,6 +20,7 @@
      D12(15) | | (16) D13
 */
 
+// https://github.com/MHeironimus/ArduinoJoystickLibrary?tab=readme-ov-file
 #include <Joystick.h>
 
 #define BTN_1 2
@@ -33,10 +34,10 @@
 #define BTN_9 10
 #define BTN_10 16
 
-#define BTN_UP A0
-#define BTN_RIGHT A1
-#define BTN_DOWN A2
-#define BTN_LEFT A3
+#define BTN_UP A3
+#define BTN_RIGHT A2
+#define BTN_DOWN A1
+#define BTN_LEFT A0
 
 
 // Global variables
