@@ -2,14 +2,20 @@
 #include "SimpleTimer.h"
 
 
-#define PIN_LED 3
-#define PIN_UP A0
-#define PIN_DOWN A1
-#define PIN_POWER 2
+// #define PIN_LED 3
+// #define PIN_UP A0
+// #define PIN_DOWN A1
+// #define PIN_POWER 2
 
-#define TIME_OUT 5
+#define PIN_UP PB3
+#define PIN_DOWN PB4
+#define PIN_POWER PB2
+#define PIN_LED PB0
 
-#define DEBUG 1
+
+#define TIME_OUT 1200
+
+//#define DEBUG 1
 
 volatile float brightnessScale = 1.0f;
 volatile float brightness = 255;
@@ -31,7 +37,14 @@ void setup() {
 
   pinMode(PIN_POWER, INPUT_PULLUP);
 
-  attachInterrupt(digitalPinToInterrupt(PIN_POWER), toggleOnOff, FALLING);
+  // for Arduino Nano
+  //attachInterrupt(digitalPinToInterrupt(PIN_POWER), toggleOnOff, FALLING);
+
+  // for ATTiny 45/85
+  cli();
+  GIMSK = 0b00100000;
+  PCMSK = 0b00000100;
+  sei();
 
   stop();
 }
@@ -144,4 +157,10 @@ void toggleOnOff()
       passedTimeInSec = TIME_OUT;
     }
   }
+}
+
+
+ISR(PCINT0_vect)
+{
+  toggleOnOff();
 }
