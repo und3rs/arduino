@@ -7,14 +7,24 @@
   1. Connect PIN_RX to TX of remote device.
   2. Connect PIN_TX to RX of remote device.
   3. Connect PIN_NEXT_BAUDRATE with GND by physical button.
+
+  #Note:
+  Not all pins on the Mega and Mega 2560 support change interrupts,
+  so only the following can be used for RX:
+  10, 11, 12, 13, 50, 51, 52, 53, 62, 63, 64, 65, 66, 67, 68, 69
+
+  Not all pins on the Leonardo and Micro support change interrupts,
+  so only the following can be used for RX:
+  8, 9, 10, 11, 14 (MISO), 15 (SCK), 16 (MOSI).
 */
 
+
 #define PIN_NEXT_BAUDRATE 2
-#define PIN_RX 3
-#define PIN_TX 4
+#define PIN_RX 10
+#define PIN_TX 11
 #define BAUDRATE_OF_LOCAL 115200
 
-unsigned long boudarates[] = {2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 76800, 115200, 230400, 250000};
+unsigned long boudarates[] = {300, 600, 750, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 31250, 38400, 57600, 74880, 76800, 115200, 230400, 250000,  460800, 500000, 921600, 1000000, 2000000};
 int boudrateIndex = 0;
 int countOfBoudrates = sizeof(boudarates) / sizeof(boudarates[0]);
 
