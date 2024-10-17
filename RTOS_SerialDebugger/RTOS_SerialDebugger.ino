@@ -20,6 +20,7 @@
 
 
 #define PIN_NEXT_BAUDRATE 2
+#define PIN_PREV_BAUDRATE 3
 #define PIN_RX 10
 #define PIN_TX 11
 #define BAUDRATE_OF_LOCAL 115200
@@ -45,7 +46,9 @@ void setup() {
   Serial.begin(BAUDRATE_OF_LOCAL);
 
   pinMode(PIN_NEXT_BAUDRATE, INPUT_PULLUP);
+  pinMode(PIN_PREV_BAUDRATE, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(PIN_NEXT_BAUDRATE), changeBaudrateToNext, LOW);
+  attachInterrupt(digitalPinToInterrupt(PIN_PREV_BAUDRATE), changeBaudrateToPrev, LOW);
   
   // while (!Serial) {
   //   ; // wait for serial port to connect. Needed for native USB, on LEONARDO, MICRO, YUN, and other 32u4 based boards.
@@ -91,6 +94,18 @@ void changeBaudrateToNext() {
   unsigned long interrupt_time = millis();
   if (interrupt_time - last_interrupt_time > 100) {
     boudrateIndex = (boudrateIndex + 1) % countOfBoudrates;
+    changeBaudrate(boudarates[boudrateIndex]);
+    last_interrupt_time = interrupt_time;
+  }
+}
+
+
+
+void changeBaudrateToPrev() {
+  static unsigned long last_interrupt_time = 0;
+  unsigned long interrupt_time = millis();
+  if (interrupt_time - last_interrupt_time > 100) {
+    boudrateIndex = (boudrateIndex - 1 < 0) ? (countOfBoudrates - 1) : (boudrateIndex - 1);
     changeBaudrate(boudarates[boudrateIndex]);
     last_interrupt_time = interrupt_time;
   }
