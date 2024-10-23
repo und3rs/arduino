@@ -50,21 +50,21 @@ Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, JOYSTICK_TYPE_GAMEPAD,
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-  pinMode(BTN_1, INPUT_PULLUP);
-  pinMode(BTN_2, INPUT_PULLUP);
-  pinMode(BTN_3, INPUT_PULLUP);
-  pinMode(BTN_4, INPUT_PULLUP);
-  pinMode(BTN_5, INPUT_PULLUP);
-  pinMode(BTN_6, INPUT_PULLUP);
-  pinMode(BTN_7, INPUT_PULLUP);
-  pinMode(BTN_8, INPUT_PULLUP);
-  pinMode(BTN_9, INPUT_PULLUP);
-  pinMode(BTN_10, INPUT_PULLUP);
+  pinMode(BTN_1, INPUT);
+  pinMode(BTN_2, INPUT);
+  pinMode(BTN_3, INPUT);
+  pinMode(BTN_4, INPUT);
+  pinMode(BTN_5, INPUT);
+  pinMode(BTN_6, INPUT);
+  pinMode(BTN_7, INPUT);
+  pinMode(BTN_8, INPUT);
+  pinMode(BTN_9, INPUT);
+  pinMode(BTN_10, INPUT);
 
-  pinMode(BTN_UP, INPUT_PULLUP);
-  pinMode(BTN_RIGHT, INPUT_PULLUP);
-  pinMode(BTN_DOWN, INPUT_PULLUP);
-  pinMode(BTN_LEFT, INPUT_PULLUP);
+  pinMode(BTN_UP, INPUT);
+  pinMode(BTN_RIGHT, INPUT);
+  pinMode(BTN_DOWN, INPUT);
+  pinMode(BTN_LEFT, INPUT);
 
   Joystick.begin();
   Joystick.setXAxisRange(-1, 1);
@@ -72,21 +72,21 @@ void setup() {
 }
 
 
-int prevUp = HIGH;
-int prevRight = HIGH;
-int prevDown = HIGH;
-int prevLeft = HIGH;
+int prevUp = LOW;
+int prevRight = LOW;
+int prevDown = LOW;
+int prevLeft = LOW;
 
-int prevBtn1 = HIGH;
-int prevBtn2 = HIGH;
-int prevBtn3 = HIGH;
-int prevBtn4 = HIGH;
-int prevBtn5 = HIGH;
-int prevBtn6 = HIGH;
-int prevBtn7 = HIGH;
-int prevBtn8 = HIGH;
-int prevBtn9 = HIGH;
-int prevBtn10 = HIGH;
+int prevBtn1 = LOW;
+int prevBtn2 = LOW;
+int prevBtn3 = LOW;
+int prevBtn4 = LOW;
+int prevBtn5 = LOW;
+int prevBtn6 = LOW;
+int prevBtn7 = LOW;
+int prevBtn8 = LOW;
+int prevBtn9 = LOW;
+int prevBtn10 = LOW;
 
 // the loop function runs over and over again forever
 void loop() {
@@ -109,55 +109,53 @@ void loop() {
   if(up != prevUp || down != prevDown) {
     prevUp = up;
     prevDown = down;
-    Joystick.setYAxis(up == LOW ? -1 : (down == LOW ? 1 : 0));
+    Joystick.setYAxis(up == HIGH ? -1 : (down == HIGH ? 1 : 0));
   }
   if(right != prevRight || left != prevLeft) {
     prevRight = right;
     prevLeft = left;
-    Joystick.setXAxis(right == LOW ? 1 : (left == LOW ? -1 : 0));
+    Joystick.setXAxis(right == HIGH ? 1 : (left == HIGH ? -1 : 0));
   }
   
 
   if(button1 != prevBtn1) {
     prevBtn1 = button1;
-    Joystick.setButton(0, !button1);
+    Joystick.setButton(0, button1);
   }
   if(button2 != prevBtn2) {
     prevBtn2 = button2;
-    Joystick.setButton(1, !button2);
+    Joystick.setButton(1, button2);
   }
   if(button3 != prevBtn3) {
     prevBtn3 = button3;
-    Joystick.setButton(2, !button3);
+    Joystick.setButton(2, button3);
   }
   if(button4 != prevBtn4) {
     prevBtn4 = button4;
-    Joystick.setButton(3, !button4);
+    Joystick.setButton(3, button4);
   }
   if(button5 != prevBtn5) {
     prevBtn5 = button5;
-    Joystick.setButton(4, !button5);
+    Joystick.setButton(4, button5);
   }
   if(button6 != prevBtn6) {
     prevBtn6 = button6;
-    Joystick.setButton(5, !button6);
+    Joystick.setButton(5, button6);
   }
   if(button7 != prevBtn7) {
     prevBtn7 = button7;
-    Joystick.setButton(6, !button7);
+    Joystick.setButton(6, button7);
   }
   if(button8 != prevBtn8) {
     prevBtn8 = button8;
-    Joystick.setButton(7, !button8);
+    Joystick.setButton(7, button8);
   }
   if(button9 != prevBtn9) {
     prevBtn9 = button9;
-    Joystick.setButton(8, !button9);
+    Joystick.setButton(8, button9);
   }
   if(button10 != prevBtn10) {
     prevBtn10 = button10;
-    Joystick.setButton(9, !button10);
+    Joystick.setButton(9, button10);
   }
-
-  delay(10);
 }
