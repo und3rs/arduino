@@ -118,7 +118,7 @@ void stop() {
 
 
 
-int updateBrightness() {
+void updateBrightness() {
   brightness = ((255.0 * ((TIME_OUT - passedTimeInSec) / float(TIME_OUT))) * brightnessScale);
 }
 
